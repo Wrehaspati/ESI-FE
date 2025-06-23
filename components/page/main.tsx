@@ -56,6 +56,9 @@ export default function Main() {
 
   // Handle event click, redirect to event activity page
   const handleEventClick = (event: IEvent) => {
+    if (event.id == "6") {
+      window.open("https://ticket-esi.bagoesesport.com", "_blank");
+    }
     router.push(`/activity/?event=${event.id}`)
   }
 
