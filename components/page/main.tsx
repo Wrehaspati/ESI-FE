@@ -56,10 +56,11 @@ export default function Main() {
 
   // Handle event click, redirect to event activity page
   const handleEventClick = (event: IEvent) => {
-    if (event.id == "6") {
-      window.open("https://ticket-esi.bagoesesport.com", "_blank");
+    if (event.external_link && event.external_link.length > 0) {
+      window.open(event.external_link, "_self");
+    } else {
+      router.push(`/activity/?event=${event.id}`)
     }
-    router.push(`/activity/?event=${event.id}`)
   }
 
   const EventCard = ({ event, index }: { event: IEvent, index: number }) => {
@@ -83,7 +84,7 @@ export default function Main() {
             <Image alt="" src={event.event_logo ?? "/images/logo.png"} width={50} height={50} className="p-0.5 bg-white rounded-sm" />
           </div>
         </div>
-        <div className='absolute left-0 top-0 w-full h-full bg-black opacity-75 group-hover:opacity-50 group-hover:duration-300 transition-all z-0'></div>
+        <div className='absolute left-0 top-0 w-full h-full bg-black opacity-20 group-hover:opacity-50 group-hover:duration-300 transition-all z-0'></div>
       </div>
     )
   }

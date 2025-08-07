@@ -10,4 +10,5 @@ export interface IEvent {
   updated_at: string
   category: ICategory
   is_active:number
+  external_link?: string
 }
