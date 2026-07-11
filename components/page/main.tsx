@@ -17,7 +17,7 @@ import Link from 'next/link';
 
 function FetchEvents() {
   const fetcher = (url: string) =>
-    axiosInstance(url).then((r) => r.data?.data.filter((event: IEvent) => event.is_active === 1))
+    axiosInstance(url).then((r) => r.data?.data.filter((event: IEvent) => event.is_active == 1))
 
   const { data, isLoading } = useSWR(`/events`, fetcher)
 
@@ -98,8 +98,8 @@ export default function Main() {
           <div className="flex items-center space-x-2">
             <div className="grid flex-1 gap-2">
               <p className="text-sm">
-                Bagi peserta yang ingin berpartisipasi dalam lomba yang diselenggarakan, 
-                peserta <b>diwajibkan untuk membuat akun</b> dan <b>mendaftarkan akun tersebut sebagai atlet </b> 
+                Bagi peserta yang ingin berpartisipasi dalam lomba yang diselenggarakan,
+                peserta <b>diwajibkan untuk membuat akun</b> dan <b>mendaftarkan akun tersebut sebagai atlet </b>
                 dengan mengisi formulir yang disediakan.
               </p>
               <p className="text-sm">
@@ -128,7 +128,7 @@ export default function Main() {
         {/* Header */}
         <NavigationBar />
 
-        <PopupAlert /> 
+        <PopupAlert />
 
         {/* Hero */}
         <div className="flex lg:text-2xl text-base font-supertall uppercase text-white px-5 lg:mt-10 mt-5 mb-5">

@@ -48,7 +48,7 @@ const ActivityPage = () => {
     selectedEventId ? `/event/${selectedEventId}/detail` : null,
     fetcher
   );
-  
+
   useEffect(() => {
     if (eventIdFromUrl) {
       setSelectedEventId(Number(eventIdFromUrl));
@@ -57,13 +57,13 @@ const ActivityPage = () => {
   useEffect(() => {
     if (activitiesData?.data?.activities) {
       const now = new Date();
-  
+
       const expiredStatus = activitiesData.data.activities.reduce((acc, activity) => {
         const endDate = new Date(activity.end_at);
-        acc[activity.id] = isAfter(now, endDate); 
+        acc[activity.id] = isAfter(now, endDate);
         return acc;
       }, {} as { [key: number]: boolean });
-  
+
       setExpiredActivities(expiredStatus);
     }
   }, [activitiesData]);
@@ -103,28 +103,28 @@ const ActivityPage = () => {
               </div>
             </div>
             <div className="font-sans flex text-sm">
-          {isTicket(data) ? (
-            <TicketForm data={data} ticketID={data.id} />
-          ) : (
-              <Button
-                onClick={() => router.push(`/competition/register?id=${data.id}`)}
-                className="w-full text-white rounded-sm font-semibold hover:text-[#ff0000] bg-[#ff0000] justify-center items-center text-center p-3 transition-all hover:border-[#ff0000] border-transparent border hover:bg-transparent disabled:bg-red-700"
-                disabled={!data.status?.data.is_open || expiredActivities[data.id]} 
-              >
-                {expiredActivities[data.id]
-                ? `Event berakhir`
-                : !data.status?.data.is_open
-                ? `Segera Hadir`
-                : `Daftar Sekarang`}
-              </Button>
-          )}
-        </div>
+              {isTicket(data) ? (
+                <TicketForm data={data} ticketID={data.id} />
+              ) : (
+                <Button
+                  onClick={() => router.push(`/competition/register?id=${data.id}`)}
+                  className="w-full text-white rounded-sm font-semibold hover:text-[#ff0000] bg-[#ff0000] justify-center items-center text-center p-3 transition-all hover:border-[#ff0000] border-transparent border hover:bg-transparent disabled:bg-red-700"
+                  disabled={!data.status?.data.is_open || expiredActivities[data.id]}
+                >
+                  {expiredActivities[data.id]
+                    ? `Event berakhir`
+                    : !data.status?.data.is_open
+                      ? `Segera Hadir`
+                      : `Daftar Sekarang`}
+                </Button>
+              )}
+            </div>
 
           </div>
-          </div>
-          </div>
-        )
-      }
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="lg:py-[56px] lg:px-[80px] h-full w-full">
@@ -163,14 +163,14 @@ const ActivityPage = () => {
                         <Card key={competition.id} data={competition} activity={activity} />
                       ))}
                     </>
-                  ):(
+                  ) : (
                     <p className="lg:ml-14 text-start lg:text-lg text-white mt-5 font-supertall">Akan Segera Hadir</p>
                   )}
                 </div>
               </div>
             ))
           ) : (
-            <p className="text-center lg:text-start lg:text-lg text-white mt-5 font-supertall flex gap-2"><Cog/> Akan Segera Hadir</p>
+            <p className="text-center lg:text-start lg:text-lg text-white mt-5 font-supertall flex gap-2"><Cog /> Akan Segera Hadir</p>
           )
         ) : null}
       </div>
